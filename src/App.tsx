@@ -1,4 +1,5 @@
 import { Accordion } from "./components/Accordion";
+import { AccordionITem } from "./components/AccordionITem";
 function App() {
   const items = [
     {
@@ -20,6 +21,15 @@ function App() {
   return (
     <div className="m-5">
       <Accordion items={items} />
+      <Accordion items={items} />
+      <Accordion items={items} />
+      <AccordionITem
+        item={{
+          id: 1,
+          label: "SingleAccordion",
+          content: "Content of SingleAccordion",
+        }}
+      />
     </div>
   );
 }

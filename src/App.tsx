@@ -1,37 +1,23 @@
-import { Accordion } from "./components/Accordion";
-import { AccordionITem } from "./components/AccordionITem";
-function App() {
-  const items = [
-    {
-      id: 1,
-      label: "Accordion 1",
-      content: "Content 1",
-    },
-    {
-      id: 2,
-      label: "Accordion 2",
-      content: "Content 2",
-    },
-    {
-      id: 3,
-      label: "Accordion 3",
-      content: "Content 3",
-    },
-  ];
+import React from "react";
+import { Collapse, Panel } from "./components/accordion/Accordion";
+
+const App: React.FC = () => {
   return (
-    <div className="m-5">
-      <Accordion items={items} />
-      <Accordion items={items} />
-      <Accordion items={items} />
-      <AccordionITem
-        item={{
-          id: 1,
-          label: "SingleAccordion",
-          content: "Content of SingleAccordion",
-        }}
-      />
+    <div className="p-10">
+      <h2 className="text-2xl font-bold mb-4">Custom Accordion</h2>
+      <Collapse accordion>
+        <Panel header="Panel 1">
+          <p>This is the content of Panel 1.</p>
+        </Panel>
+        <Panel header="Panel 2">
+          <p>This is the content of Panel 2.</p>
+        </Panel>
+        <Panel header="Panel 3">
+          <p>This is the content of Panel 3.</p>
+        </Panel>
+      </Collapse>
     </div>
   );
-}
+};
 
 export default App;

@@ -5,7 +5,7 @@ const App: React.FC = () => {
   return (
     <div className="p-10">
       <h2 className="text-2xl font-bold mb-4">Custom Accordion</h2>
-      <Collapse accordion>
+      <Collapse accordion tabIndex={1}>
         <Panel header="Panel 1">
           <p>This is the content of Panel 1.</p>
         </Panel>

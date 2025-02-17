@@ -1,7 +1,7 @@
 export interface AccordionProps {
   customClass?: string;
   disabledCollapse?: string[] | number[] | null;
-  showIcon?: boolean;
+  hiddenIcon?: boolean;
   icon?: React.ReactNode;
   defaultActiveKey?: string[] | number[] | null;
   items: {

@@ -1,37 +1,27 @@
-import { GoChevronRight } from "react-icons/go";
 import { Accordion } from "./components/Accordion";
+import type { AccordionProps } from "./components/AccordionProps";
+
+const text = "Hello world!";
+
 function App() {
-  const items = [
+  const items: AccordionProps["items"] = [
     {
-      id: 1,
+      id: "1",
       label: "Accordion 1",
-      content: <p className="text-2xl">Content 1</p>,
+      content: <p className="text-2xl">{text}</p>,
     },
     {
-      id: 2,
+      id: "2",
       label: "Accordion 2",
-      content: <p className="text-2xl">Content 2</p>,
+      content: <p className="text-2xl">{text}</p>,
     },
     {
-      id: 3,
+      id: "3",
       label: "Accordion 3",
-      content: <p className="text-2xl">Content 3</p>,
+      content: <p className="text-2xl">{text}</p>,
     },
   ];
-  return (
-    <div className="m-5">
-      <Accordion
-        items={items}
-        defaultActiveKey={[1]}
-        disabledCollapse={[2]}
-        icon={
-          <div className="text-2xl ">
-            <GoChevronRight />
-          </div>
-        }
-      />
-    </div>
-  );
+  return <Accordion items={items} defaultActiveKey={["1"]} />;
 }
 
 export default App;

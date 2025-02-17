@@ -7,7 +7,7 @@ export const Accordion: React.FC<AccordionProps> = ({
   disabledCollapse,
   items,
   defaultActiveKey,
-  showIcon = true,
+  hiddenIcon,
   icon,
 }) => {
   const [isOpen, setIsOpen] = useState<
@@ -56,14 +56,15 @@ export const Accordion: React.FC<AccordionProps> = ({
         {item.content}
       </div>
     );
+    const customIcon = icon ? (
+      <div className={`${isExpanded ? "rotate-270" : ""}`}>{icon}</div>
+    ) : null;
+
     return (
       <div className="" key={item.id}>
         <div onClick={() => handleClick(index)} className={classes}>
           {item.label}
-          {(showIcon && (
-            <div className={`${isExpanded ? "rotate-270" : ""} `}>{icon}</div>
-          )) ||
-            defaultIcon}
+          {hiddenIcon ? null : customIcon || defaultIcon}
         </div>
         {content}
       </div>

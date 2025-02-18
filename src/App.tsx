@@ -21,7 +21,7 @@ function App() {
       content: <p className="text-2xl">{text}</p>,
     },
   ];
-  return <Accordion items={items} defaultActiveKey={["1"]} />;
+  return <Accordion items={items} defaultActiveKeys={["1", "2"]} />;
 }
 
 export default App;

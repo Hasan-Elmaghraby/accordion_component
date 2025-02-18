@@ -3,7 +3,8 @@ export interface AccordionProps {
   disabledCollapse?: string[] | number[] | null;
   hiddenIcon?: boolean;
   icon?: React.ReactNode;
-  defaultActiveKey?: string[] | number[] | null;
+  defaultActiveKeys?: string[] | number[] | null;
+  toggleAccordion?: boolean;
   items: {
     id: number | string;
     label: string;

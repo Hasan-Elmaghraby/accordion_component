@@ -6,40 +6,39 @@ import type { AccordionProps } from "./AccordionProps";
 export const Accordion: React.FC<AccordionProps> = ({
   disabledCollapse,
   items,
-  defaultActiveKey,
+  defaultActiveKeys,
   hiddenIcon,
   icon,
+  toggleAccordion = false,
 }) => {
-  const [isOpen, setIsOpen] = useState<
-    number | string | number[] | string[] | null
-  >([]);
+  const [isOpen, setIsOpen] = useState<(number | string)[]>([]);
 
-  const handleClick = (currentIndex: number) => {
+  const handleClick = (currentIndex: number | string) => {
     if (
       Array.isArray(disabledCollapse) &&
-      disabledCollapse.some((key) => key === items[currentIndex].id)
+      disabledCollapse.some((key) => key === items[currentIndex as number].id)
     ) {
       return;
     }
-    setIsOpen((currentExpandedIndex) =>
-      currentExpandedIndex === currentIndex ? null : currentIndex
+
+    setIsOpen((prevOpen) =>
+      toggleAccordion
+        ? prevOpen.includes(currentIndex)
+          ? []
+          : [currentIndex]
+        : prevOpen.includes(currentIndex)
+        ? prevOpen.filter((key) => key !== currentIndex)
+        : [...prevOpen, currentIndex]
     );
   };
 
   useEffect(() => {
-    items.map((item, index) => {
-      if (
-        Array.isArray(defaultActiveKey) &&
-        defaultActiveKey.some((key) => key === item.id)
-      ) {
-        setIsOpen(() => {
-          return index;
-        });
-      }
-    });
-  }, [items, defaultActiveKey]);
+    if (Array.isArray(defaultActiveKeys)) {
+      setIsOpen(toggleAccordion ? [defaultActiveKeys[0]] : defaultActiveKeys);
+    }
+  }, [defaultActiveKeys, toggleAccordion]);
 
-  const renderedItems = items.map((item, index) => {
+  const renderedItems = items.map((item) => {
     const classes = classnames(
       "flex justify-between items-center bg-sky-500 hover:bg-sky-700 p-5 cursor-pointer transition delay-150 duration-300 ease-in-out",
       {
@@ -48,7 +47,8 @@ export const Accordion: React.FC<AccordionProps> = ({
           (disabledCollapse as (string | number)[]).includes(item.id),
       }
     );
-    const isExpanded = index === isOpen;
+
+    const isExpanded = isOpen.includes(item.id);
 
     const defaultIcon = isExpanded ? <GoChevronUp /> : <GoChevronRight />;
     const content = isExpanded && (
@@ -62,7 +62,7 @@ export const Accordion: React.FC<AccordionProps> = ({
 
     return (
       <div className="" key={item.id}>
-        <div onClick={() => handleClick(index)} className={classes}>
+        <div onClick={() => handleClick(item.id)} className={classes}>
           {item.label}
           {hiddenIcon ? null : customIcon || defaultIcon}
         </div>
